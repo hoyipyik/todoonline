@@ -61,10 +61,11 @@ export class App extends PureComponent {
     
     if(prevState.data!==this.state.data || prevState.onlineMode!==this.state.onlineMode){
       // console.log(prevState,"#########")
-      const data = this.state.data
+      let data = this.state.data
       if(!this.state.onlineMode){
         localStorage.setItem("data", JSON.stringify(data))
       }else{
+        if(data.length === 0) data = [{checked: false, id: 0, title: "DEMO"}]
         axios.post("/data.json", data)
         .then(responce=>{
           console.log("Post", responce)
