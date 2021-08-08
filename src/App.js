@@ -19,6 +19,7 @@ export class App extends PureComponent {
         if(responce.data!==null){
           const data = Object.values(responce.data.valueOf())
           console.log(data[data.length-1])
+          if(this.state.data!==[])
           this.setState({
             data: data[data.length-1]
           })
