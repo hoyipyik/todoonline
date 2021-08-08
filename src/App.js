@@ -18,8 +18,13 @@ export class App extends PureComponent {
         console.log("Mount data", responce)
         if(responce.data!==null){
           const data = Object.values(responce.data.valueOf())
-          console.log(data[data.length-1])
-          if(this.state.data!==[])
+          if(data[data.length-1][0].title === "DEMO"){
+            // console.log(data[data.length-1][0], "_________" )  
+            this.setState({
+              data: []
+            })
+          }
+          else
           this.setState({
             data: data[data.length-1]
           })

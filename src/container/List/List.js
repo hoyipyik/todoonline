@@ -24,6 +24,7 @@ export default class List extends PureComponent {
             return item.id = index
         })
         this.props.updateData(newData)
+        if(newData.length === 0) newData = [{checked: false, id: 0, title: "DEMO"}]
         axios.post("/data.json", newData)
         .then(responce=>{
           console.log("Post", responce)
@@ -40,14 +41,14 @@ export default class List extends PureComponent {
             let title = item.title
             // console.log(this.props.data[index].checked)
             return <Item 
-                key={item.id} 
+                key={item.id+3} 
                 id={item.id}
                 checked={checked} 
                 checkboxHandler={this.checkboxHandler}
                 deleteButtonHandler={this.deleteButtonHandler}
                 title={title}/>
         })
-        console.log("[List.js]: Full data",data)
+        console.log("[List.js]: Full data", data)
         return (
             <div>
                 {items}
