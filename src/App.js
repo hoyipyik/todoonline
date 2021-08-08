@@ -1,19 +1,30 @@
 import React, { PureComponent } from 'react'
 
+
 import Add from "./Components/Add/Add"
 import List from "./container/List/List"
 import axios from "./axios-post"
+import Settings from './Components/Settings/Settings'
 
 export class App extends PureComponent {
 
   state ={
     title: '',
     checked: false,
-    data: []
+    data: [],
+    onlineMode: false
   }
 
   componentDidMount(){
-    axios.get("/data.json")
+    const documentOnlineMode = JSON.parse(localStorage.getItem("onlineMode"))
+    if(documentOnlineMode!==null){
+      this.setState({
+        onlineMode: documentOnlineMode
+      })
+    }
+
+    if(documentOnlineMode){
+      axios.get("/data.json")
       .then(responce=>{
         console.log("Mount data", responce)
         if(responce.data!==null){
@@ -33,6 +44,36 @@ export class App extends PureComponent {
       .catch(error=>{
         console.log(error)
       })
+    }else{
+      const documentData = JSON.parse(localStorage.getItem("data"))
+      if (documentData !== null){
+        this.setState({
+          data : documentData,
+      })
+    }
+  }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.onlineMode!==this.state.onlineMode){
+      localStorage.setItem("onlineMode",JSON.stringify(this.state.onlineMode))
+    }
+    
+    if(prevState.data!==this.state.data || prevState.onlineMode!==this.state.onlineMode){
+      // console.log(prevState,"#########")
+      const data = this.state.data
+      if(!this.state.onlineMode){
+        localStorage.setItem("data", JSON.stringify(data))
+      }else{
+        axios.post("/data.json", data)
+        .then(responce=>{
+          console.log("Post", responce)
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+      }
+    }
   }
 
   inputHandler = (event)=>{
@@ -57,16 +98,24 @@ export class App extends PureComponent {
     else this.setState({
       title: ''
     })
-    axios.post("/data.json", data)
-        .then(responce=>{
-          console.log("Post", responce)
-        })
-        .catch(error=>console.log(error))
+    // if(this.state.onlineMode){
+    //   axios.post("/data.json", data)
+    //     .then(responce=>{
+    //       console.log("Post", responce)
+    //     })
+    //     .catch(error=>console.log(error))
+    // }
   }
 
   updateData = (item) =>{
     this.setState({
       data: item
+    })
+  }
+
+  updateOnlineMode = (item) =>{
+    this.setState({
+      onlineMode: item
     })
   }
 
@@ -79,9 +128,14 @@ export class App extends PureComponent {
           inputHandler={this.inputHandler}
           />
         <br/>
+        <Settings
+          onlineMode={this.state.onlineMode}
+          updateOnlineMode={this.updateOnlineMode}
+        />
         <List 
           data={this.state.data}
           updateData={this.updateData}
+          onlineMode={this.state.onlineMode}
           />
       </div>
     )
