@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/hoyipyik/todoonline/static/css/main.2dc21f71.chunk.css",
+    "main.js": "/hoyipyik/todoonline/static/js/main.5a99c416.chunk.js",
+    "main.js.map": "/hoyipyik/todoonline/static/js/main.5a99c416.chunk.js.map",
+    "runtime-main.js": "/hoyipyik/todoonline/static/js/runtime-main.627063bc.js",
+    "runtime-main.js.map": "/hoyipyik/todoonline/static/js/runtime-main.627063bc.js.map",
+    "static/js/2.21a90541.chunk.js": "/hoyipyik/todoonline/static/js/2.21a90541.chunk.js",
+    "static/js/2.21a90541.chunk.js.map": "/hoyipyik/todoonline/static/js/2.21a90541.chunk.js.map",
+    "static/js/3.8baa7bdb.chunk.js": "/hoyipyik/todoonline/static/js/3.8baa7bdb.chunk.js",
+    "static/js/3.8baa7bdb.chunk.js.map": "/hoyipyik/todoonline/static/js/3.8baa7bdb.chunk.js.map",
+    "index.html": "/hoyipyik/todoonline/index.html",
+    "service-worker.js": "/hoyipyik/todoonline/service-worker.js",
+    "service-worker.js.map": "/hoyipyik/todoonline/service-worker.js.map",
+    "static/css/main.2dc21f71.chunk.css.map": "/hoyipyik/todoonline/static/css/main.2dc21f71.chunk.css.map",
+    "static/js/2.21a90541.chunk.js.LICENSE.txt": "/hoyipyik/todoonline/static/js/2.21a90541.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.627063bc.js",
+    "static/js/2.21a90541.chunk.js",
+    "static/css/main.2dc21f71.chunk.css",
+    "static/js/main.5a99c416.chunk.js"
+  ]
+}
