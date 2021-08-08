@@ -87,7 +87,8 @@ export class App extends PureComponent {
     const item = {
       title: this.state.title,
       checked: this.state.checked,
-      id: this.state.data.length
+      id: this.state.data.length,
+      property: false
     }
     const data =[...this.state.data, item]
     if(this.state.title!=="")

@@ -15,7 +15,12 @@ export default function item (props){
                         onClick={()=>props.checkboxHandler(props.id)}
                         color="primary"
                         checked={props.checked}/>
-                    {props.title}
+                    <span 
+                        onClick={()=>props.propertyHandler(props.id)}
+                        style={{ textDecoration: props.checked ? "line-through" : null,
+                            marginLeft:16, fontWeight: props.property ? "bold" : null,}}>
+                            {props.title}
+                    </span>
                 </Grid>
                 <Grid item xs={2}>
                         <DeleteIcon 
