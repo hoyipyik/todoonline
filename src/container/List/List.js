@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-// import axios from "../../axios-post"
+import axios from "../../axios-post"
 
 import Item from '../../Components/Item/Item'
 
@@ -27,14 +27,14 @@ export default class List extends PureComponent {
         })
         this.props.updateData(newData)
         if(newData.length === 0) newData = [{checked: false, id: 0, title: "DEMO"}]
-        // if(this.props.onlineMode){
-        //     axios.post("/data.json", newData)
-        //     .then(responce=>{
-        //     console.log("Post", responce)
-        //     // return axios.post("/", this.state.data)
-        //     })
-        //     .catch(error=>console.log(error))
-        // }
+        if(this.props.onlineMode){
+            axios.post("/data.json", newData)
+            .then(responce=>{
+            console.log("Post", responce)
+            // return axios.post("/", this.state.data)
+            })
+            .catch(error=>console.log(error))
+        }
     }
 
     propertyHandler = (index)=>{
