@@ -49,8 +49,12 @@ export class App extends PureComponent {
       id: this.state.data.length
     }
     const data =[...this.state.data, item]
+    if(this.state.title!=="")
     this.setState({
       data: data,
+      title: ''
+    })
+    else this.setState({
       title: ''
     })
     axios.post("/data.json", data)
