@@ -63,9 +63,10 @@ export class App extends PureComponent {
         restorePrevFlag: true
       })
     }
-    // else this.setState({
-    //   restorePrevFlag: false
-    // })
+    if(prevState.onlineMode !== this.state.onlineMode && this.state.onlineMode ===false)
+      this.setState({
+      restorePrevFlag: false
+    })
     if(prevState.onlineMode!==this.state.onlineMode){
       localStorage.setItem("onlineMode",JSON.stringify(this.state.onlineMode))
     }
