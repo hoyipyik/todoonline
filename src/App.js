@@ -13,8 +13,8 @@ export class App extends PureComponent {
     title: '',
     checked: false,
     data: [],
-    onlineMode: false,
-    restorePrevFlag: null,
+    onlineMode: true,
+    restorePrevFlag: false
   }
 
   componentDidMount(){
@@ -58,7 +58,7 @@ export class App extends PureComponent {
 
   componentDidUpdate(prevProps, prevState){
     if(prevState.onlineMode !== this.state.onlineMode && prevState.onlineMode===false){
-      console.log("Flag Changed !!!!!!!!!!!!!!!!")
+      console.log(prevState.onlineMode, "Flag Changed !!!!!!!!!!!!!!!!")
       this.setState({
         restorePrevFlag: true
       })
@@ -71,7 +71,7 @@ export class App extends PureComponent {
     }
     
     if(prevState.data!==this.state.data || prevState.onlineMode!==this.state.onlineMode){
-      console.log(prevState.data,"#########")
+      console.log(prevState.data,"#########",this.state.data)
       let data = this.state.data
       if(!this.state.onlineMode){
         localStorage.setItem("data", JSON.stringify(data))
