@@ -38,14 +38,23 @@ export default function AlertDialogSlide(props) {
         <DialogTitle id="alert-dialog-slide-title">{"How to use it?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
+            <b>Basic Usage</b>
             Input tasks and click Add to add task to the todo list.
             Click checkbox to mark the task done, click dustbin icon to remove,
             click the task letter to mark it as important one.
             <br/>
+            <b>What does switch do</b>
             Online switch means all data will be sent to firebase.
             Offline Mode will guarantee all of your data will be stored at localStorage.
             When switching from online to offline,it will store all to localStorage.
             When switching from offline to online, it will erease current firebase data, and turn into online mode.
+            <br/>
+            <b>What does restore prevOnlineData button do?</b>
+            As we can see above, when switching to online from offline, all the previous 
+            online data will be erased and update with offline data to the firebase datebase.
+            If you want to restore the previous online data, just click at the restore PrevOnlineData 
+            button to fetch it.
+
           </DialogContentText>
         </DialogContent>
         <DialogActions>
