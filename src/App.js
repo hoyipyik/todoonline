@@ -27,7 +27,7 @@ export class App extends PureComponent {
     }
 
     if(documentOnlineMode){
-      axios.get("/data.json")
+      axios.get("/newdata.json")
       .then(responce=>{
         console.log("Mount data", responce)
         if(responce.data!==null){
@@ -139,7 +139,7 @@ export class App extends PureComponent {
         localStorage.setItem("data", JSON.stringify(data))
       }else{
         if(data.length === 0) data = [{checked: false, id: 0, title: "DEMO"}]
-        axios.post("/data.json", data)
+        axios.post("/newdata.json", data)
         .then(responce=>{
           console.log("Post", responce)
         })
@@ -175,7 +175,7 @@ export class App extends PureComponent {
       title: ''
     })
     // if(this.state.onlineMode){
-    //   axios.post("/data.json", data)
+    //   axios.post("/newdata.json", data)
     //     .then(responce=>{
     //       console.log("Post", responce)
     //     })
@@ -197,7 +197,7 @@ export class App extends PureComponent {
 
   restoreHandler = () => {
     if(this.state.restorePrevFlag){
-      axios.get("/data.json")
+      axios.get("/newdata.json")
         .then(responce=>{
           if(responce.data!==null){
             const data = Object.values(responce.data.valueOf())
