@@ -14,7 +14,8 @@ export class App extends PureComponent {
     checked: false,
     data: [],
     onlineMode: true,
-    restorePrevFlag: false
+    restorePrevFlag: false,
+    focusFlag: false,
   }
 
   componentDidMount(){
@@ -56,7 +57,42 @@ export class App extends PureComponent {
   }
   }
 
+  componentWillUnmount(prevProps, prevState){
+    if(prevState.focusFlag!== this.state.focusFlag){
+      document.removeEventListener("keydown", listener)
+    }
+  }
+
   componentDidUpdate(prevProps, prevState){
+    if(prevState.focusFlag !== this.state.focusFlag){
+      const listener = (event) =>{
+        if (event.code === "Enter" || event.code === "NumpadEnter"){
+          const item = {
+            title: this.state.title,
+            checked: this.state.checked,
+            id: this.state.data.length,
+            property: false
+          }
+          const data =[...this.state.data, item]
+          if(this.state.title!=="")
+          this.setState({
+            data: data,
+            title: ''
+          })
+          else this.setState({
+            title: ''
+          })
+          event.preventDefault()
+          setTimeout(()=>{
+            this.setState({
+              focusFlag: false
+            })
+          })
+        }
+      }
+      document.addEventListener("keydown",  listener)
+    }
+
     if(prevState.onlineMode !== this.state.onlineMode && prevState.onlineMode===false){
       console.log(prevState.onlineMode, "Flag Changed !!!!!!!!!!!!!!!!")
       this.setState({
@@ -92,7 +128,8 @@ export class App extends PureComponent {
   inputHandler = (event)=>{
     const value = event.target.value
     this.setState({
-      title: value
+      title: value,
+      focusFlag: true,
     })
   }
 
@@ -182,6 +219,8 @@ export class App extends PureComponent {
           restoreFlag={this.state.restorePrevFlag}
           restoreHandler={this.restoreHandler}
         />
+        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/J2Zzu2C3C3E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+        {/* <iframe src="//player.bilibili.com/player.html?aid=759949922&bvid=BV1y64y1q757&cid=392402545&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> */}
       </div>
     )
   }
