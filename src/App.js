@@ -59,6 +59,31 @@ export class App extends PureComponent {
 
   componentWillUnmount(prevProps, prevState){
     if(prevState.focusFlag!== this.state.focusFlag){
+      const listener = (event) =>{
+        if (event.code === "Enter" || event.code === "NumpadEnter"){
+          const item = {
+            title: this.state.title,
+            checked: this.state.checked,
+            id: this.state.data.length,
+            property: false
+          }
+          const data =[...this.state.data, item]
+          if(this.state.title!=="")
+          this.setState({
+            data: data,
+            title: ''
+          })
+          else this.setState({
+            title: ''
+          })
+          event.preventDefault()
+          setTimeout(()=>{
+            this.setState({
+              focusFlag: false
+            })
+          })
+        }
+      }
       document.removeEventListener("keydown", listener)
     }
   }
@@ -90,7 +115,7 @@ export class App extends PureComponent {
           })
         }
       }
-      document.addEventListener("keydown",  listener)
+      document.addEventListener("keydown", listener)
     }
 
     if(prevState.onlineMode !== this.state.onlineMode && prevState.onlineMode===false){
